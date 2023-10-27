@@ -1,0 +1,16 @@
+{
+  "fields": [
+    {
+      "name": "col1",
+      "type": "String"
+    },
+    {
+      "name": "col2",
+      "type": "String"
+    },
+    {
+      "name": "col3",
+      "type": "String"
+    }
+  ]
+}

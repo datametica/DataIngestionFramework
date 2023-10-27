@@ -1,0 +1,20 @@
+tasks:
+  - task_name: orders-json-load
+    job_name: json-orders-ingestion
+    input_processor: JsonProcessor
+    is_filename_req_in_target: False
+    job_prop_file: gs://bucket-name/property-dir/json/job_prop.yaml
+    data_file: gs://bucket-name/data-files/orders_mn.json
+    root: data  #optional tag. Used to get the key inside which we will get the actual record.
+    source_schema_validation: True
+    schema_file: gs://bucket-name/schema-files/orders_schema.json
+    data_quality:
+      data_quality_enabled: True
+      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
+    data_transformation:
+      data_trans_enabled: True
+      transformation_table: gcp_project.dataset_name.transformation_rules
+    targets:
+      - bigquery:
+          target_table: gcp_project.dataset_name.orders_mn
+          write_disposition: write_append

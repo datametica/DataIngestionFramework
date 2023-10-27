@@ -1,0 +1,12 @@
+{
+  "constants": {
+    "Document_VersionId": "4.4.1"
+  },
+  "flat_table_mapping": {
+    "emp_code": "emp_code",
+    "manager_code": "manager_code",
+    "senior_manager_code": "senior_manager_code",
+    "lead_manager_code": "lead_manager_code",
+    "company_code": "company_code"
+  }
+}

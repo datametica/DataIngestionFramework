@@ -1,0 +1,19 @@
+tasks:
+  - task_name: oracle-full-load
+    job_name: orders-batch-2015-full-load-ingestion
+    input_processor: RdbmsProcessor
+    job_prop_file: gs://bucket-name/property-dir/rdbms-full/job_prop.yaml
+    source_db:
+      query: select * from ORDERS.BATCH_2015
+      schema: ORDERS
+      rdbms_table: BATCH_2015
+    data_quality:
+      data_quality_enabled: True
+      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
+    data_transformation:
+      data_trans_enabled: True
+      transformation_table: gcp_project.dataset_name.transformation_rules
+    targets:
+      - bigquery:
+          target_table: gcp_project.dataset_name.orders_batch_2015
+          write_disposition: write_append

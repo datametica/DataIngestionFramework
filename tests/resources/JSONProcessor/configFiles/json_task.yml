@@ -1,0 +1,15 @@
+tasks:
+  - task_name: test_load
+    is_filename_req_in_target: false
+    job_prop_file: ..\resources\JSONProcessor\configFiles\json_job.yml
+    data_file: ..\resources\JSONProcessor\dataFiles\Employee.json
+    data_trans_enabled: true
+    transformation_table: '{GCP_PROJECT}:db_sse.transformation_rules'
+    data_quality_enabled: true
+    data_quality_rule_table: '{GCP_PROJECT}:db_sse.data_quality_rule'
+    parquet_file_props:
+      header_exists: no
+    target:
+      target_table: '{GCP_PROJECT}:db_sse.peopleUT'
+      schema_file: ..\resources\JSONProcessor\schemaFiles\Employee_schema.json
+      write_disposition: write_append

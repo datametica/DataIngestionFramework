@@ -1,0 +1,43 @@
+{
+  "fields": [
+    {
+      "mode": "NULLABLE",
+      "name": "Numeric",
+      "precision": "6",
+      "scale": "2",
+      "type": "NUMERIC"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "String",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Integer",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Boolean",
+      "type": "BOOLEAN"
+    },
+    {
+      "fields": [
+        {
+          "mode": "NULLABLE",
+          "name": "r_int",
+          "type": "INTEGER"
+        },
+        {
+          "mode": "NULLABLE",
+          "name": "r_string",
+          "type": "STRING"
+        }
+      ],
+      "mode": "NULLABLE",
+      "name": "Record",
+      "type": "RECORD"
+    }
+  ]
+}

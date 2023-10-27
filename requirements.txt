@@ -1,0 +1,11 @@
+apache-beam[gcp]
+avro
+fastavro
+gcsfs
+db-dtypes
+google-cloud-secret-manager
+ndjson
+sendgrid
+xmltodict
+JayDeBeApi
+PyYAML

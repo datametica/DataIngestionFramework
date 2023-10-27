@@ -1,0 +1,32 @@
+source: delimited_file
+target_sys: bigquery
+job_name: csv_load-schema-conformance-somnath
+dataflow_prop:
+  #dataflow level properties
+  #  streaming: True
+  runner: DataflowRunner
+  autoscaling_algorithm: THROUGHPUT_BASED
+  experiments: use_runner_v2
+  save_main_session: False
+  #disables usage of public ips in dataflow VMs
+  no_use_public_ips: True
+  #temporary and stage location for dataflow job
+  #dataflow virtual machine properties
+  worker_machine_type: n1-standard-4
+  #  num_workers: 1
+  #  max_num_workers: 10
+  #code file to install additional python packages at runtime
+  setup_file: ./setup.py
+error:
+  insert_error_rec: true
+  error_table: '{GCP_PROJECT}:db_sse.error_table'
+  error_table_write_disposition: write_append
+  error_table_schema: gs://{CODE_BUCKET}/python_df/CSVProcessor/error/error_table.json
+#audit:
+#  required: True
+#  audit_target: bigquery
+#  job_audit_table: '{GCP_PROJECT}.db_sse.ingestion_audit1'
+#  job_audit_table_schema: gs://{CODE_BUCKET}/python_df/CSVProcessor/audit/audit_table.json
+#  enable_file_level_auditing: True
+#  file_audit_table: '{GCP_PROJECT}.db_sse.file_audit'
+#  file_audit_table_schema: gs://{CODE_BUCKET}/python_df/CSVProcessor/audit/file_audit.json

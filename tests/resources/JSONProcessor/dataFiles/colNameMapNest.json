@@ -1,0 +1,11 @@
+{
+  "constants": {
+    "Document_VersionId": "4.4.1"
+  },
+  "flat_table_mapping": {
+    "id": "id",
+    "address_line1": "address_line1",
+    "address_line2": "address_line2",
+    "pincode": "pincode"
+  }
+}

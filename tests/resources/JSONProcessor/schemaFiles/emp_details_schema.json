@@ -1,0 +1,189 @@
+{
+  "fields": [
+    {
+      "mode": "NULLABLE",
+      "name": "Emp_ID",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Name_Prefix",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "First_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Middle_Initial",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Last_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Gender",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "E_Mail",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Father_s_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Mother_s_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Mother_s_Maiden_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Date_of_Birth",
+      "type": "DATE"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Time_of_Birth",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Age_in_Yrs_",
+      "type": "FLOAT"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Weight_in_Kgs_",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Date_of_Joining",
+      "type": "DATE"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Quarter_of_Joining",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Half_of_Joining",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Year_of_Joining",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Month_of_Joining",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Month_Name_of_Joining",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Short_Month",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Day_of_Joining",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "DOW_of_Joining",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Short_DOW",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Age_in_Company__Years_",
+      "type": "FLOAT"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Salary",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Last___Hike",
+      "type": "FLOAT"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "SSN",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Phone_No__",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Place_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "County",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "City",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "State",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Zip",
+      "type": "INTEGER"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Region",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "User_Name",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Password",
+      "type": "STRING"
+    }
+  ]
+}

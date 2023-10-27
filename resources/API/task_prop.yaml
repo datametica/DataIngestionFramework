@@ -1,0 +1,25 @@
+tasks:
+  - task_name: api-ingestion
+    job_name: api-auth-ingestion
+    input_processor: ApiProcessor
+    job_prop_file: gs://bucket-name/property-dir/pubsub/job_prop.yaml
+    api_path: 'https://www.boredapi.com/api/activity'
+    query_params: query parameters
+    root: DATA #optional tag. Used to get the key inside which we will get the actual record.
+    authentication:
+      is_public_api: true
+
+    #if api in not public
+    #authentication:
+    #  headers: {"headers": "1"}
+
+    data_quality:
+      data_quality_enabled: True
+      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
+    data_transformation:
+      data_trans_enabled: True
+      transformation_table: gcp_project.dataset_name.transformation_rules
+    targets:
+      - bigquery:
+          target_table: gcp_project.dataset_name.snwf_incremental
+          write_disposition: write_append

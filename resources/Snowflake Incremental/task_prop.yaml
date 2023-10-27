@@ -1,0 +1,29 @@
+tasks:
+  - task_name: snowflake-ingestion
+    job_name: snowflake-market-full-ingestion
+    input_processor: SnowflakeProcessor
+    job_prop_file: gs://bucket-name/property-dir/pubsub/job_prop.yaml
+    snowflake_props:
+      server_name: my_snowflake_server
+      storage_integration: my_storage_integration
+      username: my_username
+      password: my_password
+      role: my_role
+      warehouse: my_warehouse
+    source_db:
+      incremental_mode:
+        column_name: START_DATE
+        column_datatype: DATE
+      schema: my_schema
+      database: my_database
+    query: SELECT * FROM my_table
+    data_quality:
+      data_quality_enabled: True
+      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
+    data_transformation:
+      data_trans_enabled: True
+      transformation_table: gcp_project.dataset_name.transformation_rules
+    targets:
+      - bigquery:
+          target_table: gcp_project.dataset_name.snwf_incremental
+          write_disposition: write_append

@@ -1,0 +1,24 @@
+{
+  "fields": [
+    {
+      "name": "emp_code",
+      "type": "INTEGER"
+    },
+    {
+      "name": "manager_code",
+      "type": "STRING"
+    },
+    {
+      "name": "senior_manager_code",
+      "type": "STRING"
+    },
+    {
+      "name": "lead_manager_code",
+      "type": "STRING"
+    },
+    {
+      "name": "company_code",
+      "type": "STRING"
+    }
+  ]
+}

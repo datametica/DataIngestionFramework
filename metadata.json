@@ -1,0 +1,18 @@
+{
+  "name": "data-ingestion-framework-flex-template",
+  "description": "Data Ingestion Framework",
+  "parameters": [
+    {
+      "name": "project",
+      "label": "GCP Project",
+      "helpText": "Name of the Project.",
+      "isOptional": false
+    },
+    {
+      "name": "task_prop_file",
+      "label": "Task Property File",
+      "helpText": "The location of the property file",
+      "isOptional": false
+    }
+  ]
+}

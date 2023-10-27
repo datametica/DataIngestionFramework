@@ -1,0 +1,68 @@
+{
+	"fields": [{
+			"mode": "NULLABLE",
+			"name": "registration_dttm",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "id",
+			"type": "BIGNUMERIC"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "first_name",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "last_name",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "email",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "gender",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "ip_address",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "cc",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "country",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "birthdate",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "salary",
+			"type": "FLOAT"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "title",
+			"type": "STRING"
+		},
+		{
+			"mode": "NULLABLE",
+			"name": "comments",
+			"type": "STRING"
+		}
+	]
+}

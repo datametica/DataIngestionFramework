@@ -1,0 +1,27 @@
+source: pubsub
+target_sys: bigquery
+dataflow_prop:
+  runner: DataflowRunner
+  region: us-central1
+  save_main_session: False
+  network: <network>
+  subnetwork: <sub-network>
+  no_use_public_ips: True
+  service_account: <sa-account>@<project-name>.iam.gserviceaccount.com
+  temp_location: gs://bucket-name/temp
+  staging_location: gs://bucket-name/stage
+  worker_machine_type: n1-standard-1
+  num_workers: 1
+  max_num_workers: 10
+  setup_file: <path_to_setup_file>/setup.py
+  streaming: True
+error:
+  insert_error_rec: True
+  error_table: gcp_project.dataset_name.error_table
+  error_table_write_disposition: write_append
+audit:
+  required: False
+  audit_target: bigquery
+  job_audit_table: gcp_project.dataset_name.ingestion_audit
+  enable_file_level_auditing: False
+  file_audit_table: gcp_project.dataset_name.file_audit

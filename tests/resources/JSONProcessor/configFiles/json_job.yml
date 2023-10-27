@@ -1,0 +1,20 @@
+source: parquet_file
+target_sys: bigquery
+job_name: json_load_somnath
+input_processor: JSONProcessor
+error:
+  insert_error_rec: true
+  error_table: '{GCP_PROJECT}:db_sse.product_sales_error'
+  error_table_write_disposition: write_append
+  error_table_schema: gs://{CODE_BUCKET}/python_df/JSONProcessor/error/error_table.json
+audit:
+  required: true
+  audit_target: bigquery
+  job_audit_table: '{GCP_PROJECT}.db_sse.ingestion_audit'
+  job_audit_table_schema: gs://{CODE_BUCKET}/python_df/JSONProcessor/audit/audit_table.json
+  enable_file_level_auditing: true
+  file_audit_table: '{GCP_PROJECT}.db_sse.file_audit'
+  file_audit_table_schema: gs://{CODE_BUCKET}/python_df/JSONProcessor/audit/file_audit.json
+
+
+

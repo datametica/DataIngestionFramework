@@ -1,0 +1,16 @@
+tasks:
+  - task_name: test_load
+    job_name: csv-ingestion-dif-1
+    input_processor: CSVProcessor
+    dataflow_writer: BigQueryStreamWriter
+    is_filename_req_in_target: false
+    job_prop_file: resources/csv/csv_job.yml
+    data_file: test.csv
+    source_schema_validation: False
+    delimited_file_props:
+      delimiter: ","
+      header_exists: True
+    targets:
+      - bigquery_stream:
+          target_table: Employee_Details
+          write_disposition: write_append

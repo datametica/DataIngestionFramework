@@ -1,0 +1,29 @@
+{
+  "fields": [
+    {
+      "mode": "NULLABLE",
+      "name": "Firstname",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Salary",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Book",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Lastname",
+      "type": "STRING"
+    },
+    {
+      "mode": "NULLABLE",
+      "name": "Age",
+      "type": "STRING"
+    }
+  ]
+}

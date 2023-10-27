@@ -1,0 +1,7 @@
+{
+	"flat_table_mapping": {
+		"ADDRESS_LINE_1": "APARTMENT_AND_ROAD",
+		"ADDRESS_LINE_2": "AREA_AND_LOCALITY",
+		"ADDRESS_LINE_3": "CITY_AND_STATE"
+	}
+}

@@ -1,0 +1,35 @@
+source: rdbms
+target_sys: bigquery
+dataflow_prop:
+  runner: DataflowRunner
+  region: us-central1
+  save_main_session: False
+  network: <network>
+  subnetwork: <sub-network>
+  no_use_public_ips: True
+  service_account: <sa-account>@<project-name>.iam.gserviceaccount.com
+  temp_location: gs://bucket-name/temp
+  staging_location: gs://bucket-name/stage
+  worker_machine_type: n1-standard-1
+  num_workers: 1
+  max_num_workers: 10
+  setup_file: <path_to_setup_file>/setup.py
+
+rdbms_props:
+  driver_class_name: oracle.jdbc.driver.OracleDriver #In case of other RDBMS, change the driver class accordingly.
+  jdbc_url: jdbc:database://hostname:port/databaseName
+  username: root
+  password: root
+  host: 192.168.0.1
+  port: 8080
+  classpath: [ "com.oracle.database.jdbc:ojdbc8:21.7.0.0" ] #In case of other RDBMS, change the driver class accordingly.
+error:
+  insert_error_rec: True
+  error_table: gcp_project.dataset_name.error_table
+  error_table_write_disposition: write_append
+audit:
+  required: True
+  audit_target: bigquery
+  job_audit_table: gcp_project.dataset_name.ingestion_audit
+  enable_file_level_auditing: True
+  file_audit_table: gcp_project.dataset_name.file_audit

@@ -1,0 +1,36 @@
+{
+  "fields": [
+    {
+      "name": "job_name",
+      "type": "String"
+    },
+    {
+      "name": "job_id",
+      "type": "String"
+    },
+    {
+      "name": "error_record",
+      "type": "String"
+    },
+    {
+      "name": "error_type",
+      "type": "String"
+    },
+    {
+      "name": "error_desc",
+      "type": "String"
+    },
+    {
+      "name": "target_table",
+      "type": "String"
+    },
+    {
+      "name": "source_name",
+      "type": "String"
+    },
+    {
+      "name": "insert_ts",
+      "type": "timestamp"
+    }
+  ]
+}
