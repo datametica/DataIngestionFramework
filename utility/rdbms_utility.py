@@ -63,7 +63,7 @@ def create_incremental_query(task):
 
     audit_query = f"""select delta_start_val, delta_end_val from {audit_table_name}
                       where end_ts is not null  and job_name= '{job_name}' and task_name='{task_name}' and
-                      target_name='{target_name}' and status ='Completed'  order by end_ts desc limit 1  """
+                      target_name='{target_name}' and status ='COMPLETED'  order by end_ts desc limit 1  """
     audit_df = run_query(audit_query, task["project_id"])
     delta_start_val = None
     delta_end_val = None
