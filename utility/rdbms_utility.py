@@ -39,7 +39,7 @@ def get_max_delta(task):
                               url=task["rdbms_props"]["jdbc_url"],
                               driver_args=[task["rdbms_props"]["username"],
                                            task["rdbms_props"]["password"]],
-                              jars=["jars/ojdbc8-23.2.0.0.jar"]) #add the local jar paths A/C to your RDBMS
+                              jars=["jars/ojdbc8-23.2.0.0.jar"])  # add the local jar paths A/C to your RDBMS
     cursor = conn.cursor()
     cursor.execute(max_delta_query)
     max_value = cursor.fetchone()[0]
@@ -62,8 +62,7 @@ def create_incremental_query(task):
     max_delta = get_max_delta(task)
 
     audit_query = f"""select delta_start_val, delta_end_val from {audit_table_name}
-                      where end_ts is not null  and job_name= '{job_name}' and task_name='{task_name}' and
-                      target_name='{target_name}' and status ='COMPLETED'  order by end_ts desc limit 1  """
+                      where end_ts is not null  and job_name= '{job_name}' and task_name='{task_name}' and status ='COMPLETED'  order by end_ts desc limit 1  """
     audit_df = run_query(audit_query, task["project_id"])
     delta_start_val = None
     delta_end_val = None
