@@ -7,15 +7,15 @@ approach using config files. This framework is built in python using Dataflow an
 
 ## High Level Architecture:
 
-![image](https://drive.google.com/uc?export=view&id=1PHtD64v5X0iTqxUsYKpelqnOJITac_0Y)
+![image](resources/images/HLA.png)
 
 ## Codeflow:
 
-![image](https://drive.google.com/uc?export=view&id=1PSpw1bFQosuh76uzdpPEICXK6mC6H5Sc)
+![image](resources/images/code_flow.png)
 
 ## Features:
 
-![image](https://drive.google.com/uc?export=view&id=1rHsMsCdly1BWs35WzIF5LtlqVgt9wAUE)
+![image](resources/images/features.png)
 
 - DIF provides some column level customizations like <br>
 
@@ -368,7 +368,7 @@ You can find a DDL for DQ Table creation under DQ Folder in the resources folder
 
 ### Data Quality Table example:
 
-![image](https://drive.google.com/uc?export=view&id=1mMxWFWXDgnGQ4pUsRib-MdnvY-MWMDRY)
+![image](resources/images/dq_example.png)
 
 ## Data Transformation Configuration:
 
@@ -426,7 +426,7 @@ After this, we can add a row in the data transformations table to apply this tra
 
 ### Data Transformation Table example:
 
-![image](https://drive.google.com/uc?export=view&id=1A3tYyUIyqf52prGhC9RCVgFvMYbvcH0y)
+![image](resources/images/dt_example.png)
 
 The function substring takes in argument 1,5; which will extract the 1->5 characters from the string column.
 
@@ -488,7 +488,7 @@ Error Table Schema can be found under Error Table in the resources folder.
 
 ### Error Table Example:
 
-![image](https://drive.google.com/uc?export=view&id=1X6cBqvJ7d9m8M3d8j0Xq19XaBZuri6d5)
+![image](resources/images/error_table_example.png)
 
 ## Auditing:
 
@@ -515,7 +515,7 @@ There are two types of Audits - File Level Audits and Job Level Audit
 
 #### Example:
 
-![image](https://drive.google.com/uc?export=view&id=11nH-EGtPqUhxXdTXw6Q62ZtzdCr_dIxX)
+![image](resources/images/file_audit_example.png)
 
 ### Job Level Audits
 
@@ -534,7 +534,7 @@ There are two types of Audits - File Level Audits and Job Level Audit
 
 #### Example:
 
-![image](https://drive.google.com/uc?export=view&id=1sHjHfGnJSuwi9cvPeFwr0_e6PK6Iju14)
+![image](resources/images/job_audit_example.png)
 
 ## Execution Process:
 
@@ -670,6 +670,6 @@ Step 7: To run DIF execute the following command -
 
 After the execution you will be able to see a Dataflow Job on Dataflow console
 
-![image](https://drive.google.com/uc?export=view&id=1FNASkHc1p-r32CiT33MqnPS51dzgrOsV)
+![image](resources/images/df_example.png)
 
 After the Job runs successfully, the data will get ingested in the specified Target BigQuery Table.
