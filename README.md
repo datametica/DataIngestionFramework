@@ -545,7 +545,7 @@ There are two ways to run Data Ingestion Framework.
 We will have to install all the dependencies first and then run the main.py with required arguments.
 
     pip3 install requirements.txt \
-    python3 main.py --project=<project_id> --prop_file=<task_prop_path>
+    python3 main.py --project=<project_id> --task_prop_file=<task_prop_path>
 
 2. **Using DataflowRunner using Flex Template:**
 
