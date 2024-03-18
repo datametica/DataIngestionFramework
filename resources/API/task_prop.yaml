@@ -12,13 +12,6 @@ tasks:
     #if api in not public
     #authentication:
     #  headers: {"headers": "1"}
-
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.snwf_incremental

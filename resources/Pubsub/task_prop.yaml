@@ -7,12 +7,6 @@ tasks:
     windowing_time: 0.5 #by default, windowing time will be 1 sec
     source_data:
       format: json
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.markets_flatten
