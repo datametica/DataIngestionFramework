@@ -19,13 +19,13 @@ approach using config files. This framework is built in python using Dataflow an
 
 - DIF provides some column level customizations like <br>
 
-    - _Data Quality_ <br>
+    - _Data Quality_ <br> (available in enterprise version)
       Column Level Data Quality checks like isNull, rangeConstraint, valuesLike etc. ; can be configured in the DQ
       specific metadata table (name configurable from property files). These are applied on the column data on the
       fly.  
       The records which don’t conform to the DQ checks are pushed to the error/exception table(name configurable from
       property files).
-    - _Data Transformation_ <br>
+    - _Data Transformation_ <br> (available in enterprise version)
       Basic Column Level Data Transformations like nullToEmpty, epochToTimestamp, ifElseConditions etc. ; can be
       configured in the Transformation metadata table. These are applied on the column data on the fly.
     - _Schema Conformance_ <br>
@@ -222,7 +222,7 @@ Sample Property Files:
 
 - Sample Property Files can be found under the RDBMS Incremental load Folder in the resources folder.
 
-#### Large Volume Data load in Splits:
+#### Large Volume Data load in Splits (available in enterprise version):
 
 When there is large data which needs to be ingested, to fully utilise parallelism and concurrent data extraction we have
 a provision in DIF to load the data based on a column which has data that can be used as splits.
