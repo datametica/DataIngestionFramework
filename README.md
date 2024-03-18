@@ -17,22 +17,6 @@ approach using config files. This framework is built in python using Dataflow an
 
 ![image](resources/images/features.png)
 
-- DIF provides some column level customizations like <br>
-
-    - _Data Quality_ <br> (available in enterprise version)
-      Column Level Data Quality checks like isNull, rangeConstraint, valuesLike etc. ; can be configured in the DQ
-      specific metadata table (name configurable from property files). These are applied on the column data on the
-      fly.  
-      The records which don’t conform to the DQ checks are pushed to the error/exception table(name configurable from
-      property files).
-    - _Data Transformation_ <br> (available in enterprise version)
-      Basic Column Level Data Transformations like nullToEmpty, epochToTimestamp, ifElseConditions etc. ; can be
-      configured in the Transformation metadata table. These are applied on the column data on the fly.
-    - _Schema Conformance_ <br>
-      The datatype for the record(columns) can be checked on the fly; using the Target BQ table Schema.  
-      The records which don’t conform to the Schema Conformance __are pushed to the error/exception table (name
-      configurable from property files).  
-      For Instance: if the string data is sent by the source, to be pushed inside the Integer column in Bigquery
 
 - The Framework supports both Full load and Delta load.
 
@@ -60,7 +44,7 @@ The Below documents talks more about the roles/access/service account.
 
 Clone the repository:
 
-    git clone 
+    git clone git@github.com:datametica/DataIngestionFramework.git
 
 Navigate to the directory where you downloaded the repository
 
@@ -110,8 +94,6 @@ database.
 |      column_name_map      |    False     |  string  |        Column mapping for renaming columns         |
 |     file_audit_table      |    False     |  string  |               Table ID for auditing                |
 | is_filename_req_in_target |    False     |  string  |                    Source name                     |
-|       data_quality        |    False     |   dict   |              Data quality properties               |
-|    data_transformation    |    False     |   dict   |           Data transformation properties           |
 |          targets          |     True     |   dict   |                      Targets                       |
 
 **Note: Sample Property Files can be found under the resources folder.**
@@ -222,27 +204,6 @@ Sample Property Files:
 
 - Sample Property Files can be found under the RDBMS Incremental load Folder in the resources folder.
 
-#### Large Volume Data load in Splits (available in enterprise version):
-
-When there is large data which needs to be ingested, to fully utilise parallelism and concurrent data extraction we have
-a provision in DIF to load the data based on a column which has data that can be used as splits.
-
-To achieve this, we create multiple queries with WHERE condition based on the column type and values.
-
-Prerequisite:
-
-- Dataflow workers should have access to RDBMS.
-- You will have to provide credentials, driver classpath for Dataflow to connect to RDBMS in Job Property File
-- Specify the table and schema name/query in the Task Property File.- For loading large data in splits (parallelly), we
-  will need a column with splittable values like
-  integer values or timestamp values.
-
-Note: Currently supported Column Types are Integer, Timestamp, Date, Datetime.
-
-Sample Property Files:
-
-- Sample Property Files can be found under the RDBMS Splits load Folder in the resources folder.
-
 ### Streaming Ingestion:
 
 #### Kafka (JSON/Avro):
@@ -310,152 +271,6 @@ Prerequisite:
 Sample Property File:
 
 - Sample Property Files can be found in the API Folder in the resources folder.
-
-## Data Quality Configuration:
-
-Data quality is a critical aspect of any data ingestion framework, as it directly impacts the accuracy and usefulness of
-the data being ingested.
-
-The pipeline dynamically retrieves data quality rules from a designated BigQuery table and systematically applies them
-to the data being processed, ensuring that the data meets the predefined quality standards.
-
-To enable Data Quality, we will have to add data_quality tag in Task Property File and add data_quality_enabled,
-data_quality_rule_table in the tag.
-
-The data_quality_enabled tag needs to be set True and you have to specify the DQ table name in data_quality_rule_table
-with the below given schema.
-
-Note: The name of the table can be user defined.
-
-Current framework has the following Data Quality checks:
-
-- length_equals
-- null_check
-- empty_check
-
-However, if we want to add more Data quality checks, we can navigate to class **DqFunctions** inside dq_functions.py
-which is placed inside the **utility** python package and add a data quality @staticmethod.
-
-For instance, if we wish to add a DQ check where we expect to value to have a length constraint of n.
-
-we can write a function:
-
-    @staticmethod
-    def length_constraint(value, args):
-        try:
-            expected_length = int(args)
-            if len(str(value)) <= expected_length:
-                return True        
-            else:
-                return False    
-        except DqException as ex:
-            return False
-
-After this, we can add a row in the data_quality_rule table on a specific column.
-
-### Data Quality Table Schema:
-
-|              |          |          |                                          |
-|:------------:|:--------:|:--------:|:----------------------------------------:|
-| **fullname** | **mode** | **type** |             **description**              |
-|   job_name   | NULLABLE |  STRING  |        name of your data flow job        |
-| column_name  | NULLABLE |  STRING  | column name on which DQ is to be applied |
-|   dq_rule    | NULLABLE |  STRING  |            rule to be applied            |
-|     args     | NULLABLE |  STRING  |             arguments if any             |
-|   sequence   | NULLABLE | INTEGER  |                 priority                 |
-
-You can find a DDL for DQ Table creation under DQ Folder in the resources folder.
-
-### Data Quality Table example:
-
-![image](resources/images/dq_example.png)
-
-## Data Transformation Configuration:
-
-This involves converting the input data to a standardized format that is compatible with downstream processing steps,
-such as normalization, aggregation, and summarization.
-
-The pipeline leverages a designated BigQuery table to dynamically retrieve the data transformation rules, which are then
-systematically applied to the incoming data, enabling seamless and efficient data transformation as per the predefined
-rules.
-
-This metadata transformation table name needs to be specified from the job properties.
-
-To enable Data Transformation, we will have to add data_transformation tag in Task Property File and add
-data_trans_enabled, transformation_table in the tag.
-
-The data_trans_enabled tag needs to be set True and you have to specify the DQ table name in transformation_table with
-the below given schema.
-
-Note: The name of the table can be user defined.
-
-Current framework has the following Data Transformations:
-
-- rename_column
-- substring
-- trim
-- empty_to_null
-- replace
-
-However, if we want to add more Data transformations, we can navigate to class **TransFunctions** inside *
-*trans_functions.py** which is placed inside the **utility** python package and add a data transformations
-@staticmethod.
-
-For instance, if we wish to add a new data transformation method which will convert null values to empty strings.
-
-we can write a function:
-
-    @staticmethod
-        def null_to_empty(column_name, value, args):
-            if value is None:
-                return column_name, ""
-            else:
-                return column_name, value
-
-After this, we can add a row in the data transformations table to apply this transformation on the specified column.
-
-### Data Transformation Table Schema
-
-|              |          |          |                                                 |
-|:------------:|:--------:|:--------:|:-----------------------------------------------:|
-| **fullname** | **mode** | **type** |                 **description**                 |
-|   job_name   | NULLABLE |  STRING  |           name of your data flow job            |
-| column_name  | NULLABLE |  STRING  | column on which transformation is to be applied |
-|  trans_func  | NULLABLE |  STRING  |          transformations to be applied          |
-|     args     | NULLABLE |  STRING  |                arguments if any                 |
-
-### Data Transformation Table example:
-
-![image](resources/images/dt_example.png)
-
-The function substring takes in argument 1,5; which will extract the 1->5 characters from the string column.
-
-## Source Schema Conformance:
-
-Schema conformance refers to the process of validating and ensuring that the data being ingested into a system conforms
-to the predefined schema or structure. This is a critical step in the data ingestion process as it ensures that the data
-is accurate, consistent, and compatible with downstream processing steps.
-
-A schema defines the structure and format of the data and includes information such as the data type, field names, and
-constraints. Schema conformance is achieved by comparing the incoming data to the predefined schema and validating that
-it meets the required format, structure, and constraints.
-
-### Schema Structure:
-
-    { “fields” : [
-      {
-        "name": "column1",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "fields": []
-      },
-      {
-        "name": "column2",
-        "mode": "NULLABLE",
-        "type": "STRING",
-        "fields": []
-      }
-    ]}
 
 ## Error Records:
 

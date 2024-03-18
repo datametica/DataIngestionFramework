@@ -7,12 +7,6 @@ tasks:
       query: select * from ORDERS.BATCH_2015
       schema: ORDERS
       rdbms_table: BATCH_2015
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.orders_batch_2015

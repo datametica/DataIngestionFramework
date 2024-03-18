@@ -1,18 +1,12 @@
 tasks:
-  - task_name: iot-ingestion
-    job_name: kafka-iot-events
+  - task_name: kafka-ingestion
+    job_name: kafka-job
     input_processor: KafkaProcessor
     job_prop_file: gs://bucket-name/property-dir/kafka/job_prop.yaml
-    topic_name: iot-events
+    topic_name: topic
     consumer_config:
-      bootstrap.server: 100.90.29.02
+      bootstrap.server: bootstrap
       group.id: 2
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.iot_events

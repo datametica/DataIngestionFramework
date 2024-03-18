@@ -6,14 +6,6 @@ tasks:
     job_prop_file: gs://bucket-name/property-dir/josn-flatten-streaming/job_prop.yaml
     column_name_map: gs://bucket-name/misc/ColumnMapping.json
     data_file: gs://bucket-name/data-files/*
-    source_schema_validation: True
-    schema_file: gs://bucket-name/schema-files/orders_schema_nest.json
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.orders_nest_stream

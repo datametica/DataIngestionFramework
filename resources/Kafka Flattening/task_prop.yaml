@@ -6,16 +6,10 @@ tasks:
     topic_name: markets
     column_name_map: gs://bucket-name/misc/ColumnMappingMarkets.json
     consumer_config:
-      bootstrap.server: 100.90.29.02
+      bootstrap.server: bootstrap
       group.id: 2
       auto.offset.reset: latest
       enable.auto.commit: true
-    data_quality:
-      data_quality_enabled: True
-      data_quality_rule_table: gcp_project.dataset_name.data_quality_rule
-    data_transformation:
-      data_trans_enabled: True
-      transformation_table: gcp_project.dataset_name.transformation_rules
     targets:
       - bigquery:
           target_table: gcp_project.dataset_name.markets_flatten
