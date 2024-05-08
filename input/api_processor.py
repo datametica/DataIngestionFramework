@@ -84,7 +84,6 @@ class FetchApiData(beam.DoFn, abc.ABC):
                 # Tag output as valid and yield flattened data
                 yield TaggedOutput("valid", data)
         except Exception as e:
-            print(traceback.format_exc())
             # If there is an exception, tag output as invalid and yield error record
             error_record = {"job_id": gce_metadata_util.fetch_dataflow_job_id(), "error_record": str(element),
                             "error_type": "Invalid Record", "error_desc": str(e), "source_name": resolved_api_path,
