@@ -21,6 +21,7 @@ from abc import ABC
 import apache_beam as beam
 import gcsfs
 from apache_beam.io import fileio
+from apache_beam.io.filesystem import CompressionTypes
 from apache_beam.pvalue import TaggedOutput
 
 from input.base_source_processor import BaseSourceProcessor
@@ -62,7 +63,10 @@ class FileMetaData(beam.DoFn):
 
     def process(self, element):
         try:
-            filedata = element.read_utf8().splitlines()
+            if self.task_prop.get("compression_type") and self.task_prop.get("compression_type") == "gzip":
+                filedata = element.open(compression_type=CompressionTypes.GZIP).read(1000).decode('utf-8').splitlines()
+            else:
+                filedata = element.read_utf8().splitlines()
             if "delimited_file_props" in self.task_prop:
                 if "skip_rows" in self.task_prop["delimited_file_props"]:
                     filedata = filedata[int(self.task_prop["delimited_file_props"]["skip_rows"]):]
@@ -107,7 +111,7 @@ class CSVProcessor(BaseSourceProcessor, ABC):
 
     def expand(self, p_input):
         read_data = p_input | "Read" >> fileio.MatchFiles(
-            self.task["data_file"]) | "Read Matches" >> fileio.ReadMatches()
+            self.task["data_file"]) | "Read Matches" >> fileio.ReadMatches(compression=CompressionTypes.GZIP)
 
         file_content = read_data | "Fetch Meta Data From Files" >> beam.ParDo(
             FileMetaData(self.task)).with_outputs("valid",

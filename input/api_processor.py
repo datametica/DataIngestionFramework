@@ -16,6 +16,9 @@
 and processes it using Apache Beam.
 """
 import abc
+import gzip
+import json
+import traceback
 from datetime import datetime
 
 import apache_beam as beam
@@ -66,9 +69,13 @@ class FetchApiData(beam.DoFn, abc.ABC):
 
             # Send GET request to API endpoint
             response = requests.get(resolved_api_path, headers=headers)
-            json_data = response.json()
+            if self.task.get("compression_type") and self.task.get("compression_type") == "gzip":
+                json_data = json.loads(gzip.decompress(response.content).decode('utf-8'))
+            else:
+                json_data = response.json()
+
             if "root" in self.task:
-                json_data = response.json()[self.task["root"]]
+                json_data = json_data[self.task["root"]]
 
             flatten_ = flatsplode(json_data)
             # Perform Flattening If there is a Nested structure
@@ -77,6 +84,7 @@ class FetchApiData(beam.DoFn, abc.ABC):
                 # Tag output as valid and yield flattened data
                 yield TaggedOutput("valid", data)
         except Exception as e:
+            print(traceback.format_exc())
             # If there is an exception, tag output as invalid and yield error record
             error_record = {"job_id": gce_metadata_util.fetch_dataflow_job_id(), "error_record": str(element),
                             "error_type": "Invalid Record", "error_desc": str(e), "source_name": resolved_api_path,
