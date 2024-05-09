@@ -5,18 +5,7 @@
 The Data Ingestion Framework allows common functionalities like data extraction, ingestion using metadata driven
 approach using config files. This framework is built in python using Dataflow and Apache Beam SDKs.
 
-## High Level Architecture:
-
-![image](resources/images/HLA.png)
-
-## Codeflow:
-
-![image](resources/images/code_flow.png)
-
 ## Features:
-
-![image](resources/images/features.png)
-
 
 - The Framework supports both Full load and Delta load.
 
@@ -481,7 +470,7 @@ Step 6: Install all the required packages by running the following command
 
 Step 7: To run DIF execute the following command -
 
-    python3 main.py --project=<project_id> --prop_file=<task_prop_path>
+    python3 main.py --project=<project_id> --task_prop_file=<task_prop_path>
 
 After the execution you will be able to see a Dataflow Job on Dataflow console
 
