@@ -13,6 +13,7 @@
 # the License.
 
 import base64
+import logging
 
 """This module contains the implementation of the BigQuery writer.
 """
@@ -53,7 +54,12 @@ class BigQueryWriter(BaseOutputWriter, ABC):
         self.table_schema = schemaFetchBQ(self.bq_dataset + "." + self.bq_table,
                                           project=self.project, schema_file=schema_file)
 
-        self.write_disposition = prop_dict["write_disposition"]
+        self.write_disposition = str(self.prop_dict["write_disposition"]).upper()
+
+        if "write_method" in self.prop_dict:
+            if self.prop_dict["write_method"]:
+                self.write_method = str(self.prop_dict["write_method"]).upper()
+                logging.info(f"write method {self.write_method}")
 
     def expand(self, p_input):
         additional_bq_parameters = {}
@@ -63,14 +69,30 @@ class BigQueryWriter(BaseOutputWriter, ABC):
                     | f"Remove Source Name {str(self.task['targets']).split('.')[-1]}"
                     >> beam.ParDo(RemoveSourceName(self.task))
             )
-        return p_input \
-            | "Prepare Data" >> beam.ParDo(PrepareData()) \
-            | "Write To Bigquery" >> beam.io.WriteToBigQuery(
-                table=self.bq_table,
-                dataset=self.bq_dataset,
-                project=self.project,
-                additional_bq_parameters=additional_bq_parameters,
-                create_disposition="CREATE_IF_NEEDED",
-                schema=self.table_schema,
-                write_disposition=self.write_disposition,
-            )
+        if "write_method" in self.prop_dict:
+            if self.prop_dict["write_method"]:
+                return p_input \
+                    | "Prepare Data" >> beam.ParDo(PrepareData()) \
+                    | "Write To Bigquery" >> beam.io.WriteToBigQuery(
+                        table=self.bq_table,
+                        dataset=self.bq_dataset,
+                        project=self.project,
+                        additional_bq_parameters=additional_bq_parameters,
+                        create_disposition="CREATE_IF_NEEDED",
+                        method=self.write_method,
+                        schema=self.table_schema,
+                        write_disposition=self.write_disposition
+                    )
+        else:
+
+            return p_input \
+                | "Prepare Data" >> beam.ParDo(PrepareData()) \
+                | "Write To Bigquery" >> beam.io.WriteToBigQuery(
+                    table=self.bq_table,
+                    dataset=self.bq_dataset,
+                    project=self.project,
+                    additional_bq_parameters=additional_bq_parameters,
+                    create_disposition="CREATE_IF_NEEDED",
+                    schema=self.table_schema,
+                    write_disposition=self.write_disposition
+                )

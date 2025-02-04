@@ -9,3 +9,4 @@ tasks:
       - bigquery:
           target_table: gcp_project.dataset_name.orders_st
           write_disposition: write_append
+          write_method: STORAGE_WRITE_API  #optional - if not provided, DEFAULT will use STREAMING_INSERTS on Streaming pipelines and FILE_LOADS on Batch pipelines.
