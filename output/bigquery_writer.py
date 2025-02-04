@@ -16,7 +16,7 @@ import base64
 
 """This module contains the implementation of the BigQuery writer.
 """
-
+#test
 from abc import ABC
 
 import apache_beam as beam
