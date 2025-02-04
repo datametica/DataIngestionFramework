@@ -408,6 +408,8 @@ you can check all permission on IAM in your GCP project
           - bigquery:
               target_table: my-gcp-project.my-dataset.employee_details
               write_disposition: WRITE_TRUNCATE
+              write_method: STORAGE_WRITE_API  #optional - if not provided, DEFAULT will use STREAMING_INSERTS on Streaming pipelines and FILE_LOADS on Batch pipelines.
+
 
 Step 4: Create the Job Property File:
 

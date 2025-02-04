@@ -12,25 +12,35 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+FROM gcr.io/dataflow-templates-base/python38-template-launcher-base
 
-FROM python:3.7
+# Ensure OpenJDK 17 is installed (if needed, adjust based on actual image contents)
+RUN apt-get update && apt-get install -y openjdk-17-jdk
 
-RUN apt-get update && \
-    apt-get install -y openjdk-11-jdk
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
-ENV PYTHONPATH "${PYTHONPATH}:/usr/local/lib/python3.7/site-packages"
+# Set the working directory
+ARG WORKDIR=/dataflow/python/using_flex_template_adv3
+RUN mkdir -p ${WORKDIR}
+WORKDIR ${WORKDIR}
 
-COPY requirements.txt /usr/local/bin/dataflow-worker/requirements.txt
-COPY jars/ /app/jars/
+# Copy your application code and additional files
+COPY . .
+COPY jars/ /jars/
 
-RUN pip install --no-cache-dir apache-beam[gcp]==2.43.0
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir -r /usr/local/bin/dataflow-worker/requirements.txt
-RUN pip download --no-cache-dir --dest /tmp/dataflow-requirements-cache -r /usr/local/bin/dataflow-worker/requirements.txt
+# Define environment variables
+ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/main.py"
+ENV PYTHON_REQUIREMENTS_FILE="${WORKDIR}/requirements.txt"
+ENV FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py"
 
-COPY --from=apache/beam_python3.7_sdk:2.43.0 /opt/apache/beam /opt/apache/beam
+# Install required Python packages
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r $PYTHON_REQUIREMENTS_FILE \
+    && pip download --no-cache-dir --dest /tmp/dataflow-requirements-cache -r $PYTHON_REQUIREMENTS_FILE
 
-WORKDIR /usr/local/bin/dataflow-worker
+# Install Apache Beam and its dependencies
+RUN pip install --no-cache-dir apache-beam[gcp]==2.60.0
 
-ENTRYPOINT ["/opt/apache/beam/boot"]
+
+# Set the entrypoint for your application
+ENTRYPOINT ["/opt/google/dataflow/python_template_launcher"]
