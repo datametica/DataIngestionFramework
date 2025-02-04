@@ -9,3 +9,5 @@ sendgrid
 xmltodict
 JayDeBeApi
 PyYAML
+scikit-learn==1.5.0
+jinja2==3.1.5
