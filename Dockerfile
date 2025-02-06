@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-FROM gcr.io/dataflow-templates-base/python38-template-launcher-base
+FROM gcr.io/dataflow-templates-base/python312-template-launcher-base
 
 # Ensure OpenJDK 17 is installed (if needed, adjust based on actual image contents)
 RUN apt-get update && apt-get install -y openjdk-17-jdk

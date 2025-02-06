@@ -15,12 +15,12 @@
 import setuptools
 
 REQUIRED_PACKAGES = [
-    "gcsfs==2022.2.0",
+    "gcsfs",
     "db-dtypes",
-    "google-cloud-secret-manager==2.10.0",
-    "snowflake-connector-python==2.7.3",
-    "ndjson==0.3.1",
-    "sendgrid==6.9.7",
+    "google-cloud-secret-manager",
+    "snowflake-connector-python",
+    "ndjson",
+    "sendgrid",
     "xmltodict",
     "pyodbc",
     "teradatasql",
