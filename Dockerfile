@@ -39,7 +39,7 @@ RUN pip install --no-cache-dir --upgrade pip \
     && pip download --no-cache-dir --dest /tmp/dataflow-requirements-cache -r $PYTHON_REQUIREMENTS_FILE
 
 # Install Apache Beam and its dependencies
-RUN pip install --no-cache-dir apache-beam[gcp]==2.60.0
+RUN pip install --no-cache-dir apache-beam[gcp]==2.62.0
 
 
 # Set the entrypoint for your application
